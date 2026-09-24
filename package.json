@@ -1,0 +1,17 @@
+{
+  "name": "family-dashboard",
+  "private": true,
+  "description": "Family expense, reminder, health and notes dashboard fed by a Telegram bot through Google Sheets.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
