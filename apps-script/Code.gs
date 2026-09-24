@@ -102,13 +102,14 @@ function doPost(e) {
 
     // HEALTH
     if (isHealthEntry) {
-      let targetName = senderName;
-      for (const name of KIDS_NAMES) {
-        if (lowerText.includes(name)) {
-          targetName = name.charAt(0).toUpperCase() + name.slice(1);
-          break;
-        }
-      }
+      // A name in the message ("poonam 54kg") wins over the sender, so anyone
+      // in the family can log a weight for anyone else.
+      const knownNames = Object.values(FAMILY_MEMBERS).concat(KIDS_NAMES);
+      const words = lowerText.split(/[^a-z]+/);
+      const mentioned = knownNames.find((name) => words.includes(name.toLowerCase()));
+      const targetName = mentioned
+        ? mentioned.charAt(0).toUpperCase() + mentioned.slice(1).toLowerCase()
+        : senderName;
 
       const unit = lowerText.includes('lbs') ? 'lbs' : 'kg';
       const weightString = extractedNumber + unit;
