@@ -1,6 +1,7 @@
 {
   "name": "family-dashboard",
   "private": true,
+  "type": "module",
   "description": "Family expense, reminder, health and notes dashboard fed by a Telegram bot through Google Sheets.",
   "workspaces": [
     "client",
